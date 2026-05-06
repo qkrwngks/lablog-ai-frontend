@@ -1,27 +1,67 @@
 import { Link } from 'react-router-dom'
-import { AppShell } from '../components/AppShell'
-import { PageHeader } from '../components/PageHeader'
 import styles from './DraftsPage.module.css'
+
+const MOCK_ITEMS = [
+  { id: '1', title: '보고서A', status: '초안 검수', hasClip: true },
+  { id: '2', title: '보고서B', status: '초안 제작 중...', hasClip: false },
+  { id: '3', title: '보고서C', status: '최종본 제작 중...', hasClip: false },
+  { id: '4', title: '보고서D', status: '최종본 검수', hasClip: true },
+  { id: '5', title: '보고서E', status: '최종본 검수', hasClip: true },
+]
+
+function Paperclip() {
+  return (
+    <svg
+      className={styles.clip}
+      viewBox="0 0 30 72"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M22 10 C22 5 8 5 8 10 L8 52 C8 62 22 62 22 52 L22 14 C22 9 12 9 12 14 L12 48"
+        stroke="#c0392b"
+        strokeWidth="3.5"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  )
+}
 
 export function DraftsPage() {
   return (
-    <AppShell variant="page">
-      <PageHeader title="임시 보관함" />
+    <div className={styles.shell}>
+      <header className={styles.header}>
+        <Link to="/" className={styles.back}>‹</Link>
+        <h1 className={styles.title}>임시 보관함</h1>
+      </header>
 
-      <p className={styles.lead}>분석 전·편집 중인 항목입니다. 메인 화면 배지와 동일하게 1건 예시를 둡니다.</p>
+      <main className={styles.content}>
+        <ul className={styles.list}>
+          {MOCK_ITEMS.map((item) => (
+            <li key={item.id} className={styles.cardWrap}>
+              {item.hasClip && <Paperclip />}
+              <div className={styles.card}>
+                <span className={styles.cardTitle}>{item.title}</span>
+                <span className={styles.cardStatus}>({item.status})</span>
+              </div>
+              <div className={styles.fold} />
+            </li>
+          ))}
+        </ul>
 
-      <ul className={styles.list}>
-        <li className={styles.card}>
-          <span className={styles.badge}>진행 중</span>
-          <span className={styles.cardTitle}>유기 합성 실험 — 촬영본 업로드됨</span>
-          <span className={styles.cardMeta}>마지막 저장 · 방금 전</span>
-          <div className={styles.actions}>
-            <Link to="/loading" className={styles.primary}>
-              이어서 분석
-            </Link>
-          </div>
-        </li>
-      </ul>
-    </AppShell>
+        <div className={styles.chevronRow}>
+          <svg viewBox="0 0 24 24" fill="none" className={styles.chevron}>
+            <path
+              d="M6 9L12 15L18 9"
+              stroke="#888"
+              strokeWidth="2.5"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            />
+          </svg>
+        </div>
+      </main>
+    </div>
   )
 }
