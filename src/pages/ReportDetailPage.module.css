@@ -1,0 +1,100 @@
+.shell {
+  min-height: 100dvh;
+  width: 100%;
+  max-width: 430px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  background: #f5f4f1;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: 0.85rem 1.25rem;
+  background: #ffffff;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  flex-shrink: 0;
+  gap: 0.5rem;
+}
+
+.back {
+  font-size: 1.9rem;
+  line-height: 1;
+  color: #222;
+  text-decoration: none;
+  width: 2rem;
+  flex-shrink: 0;
+}
+
+.title {
+  flex: 1;
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin: 0;
+  color: #111;
+}
+
+.badge {
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #7a5500;
+  background: #fff3cd;
+  border: 1px solid #ffe08a;
+  border-radius: 20px;
+  padding: 0.2rem 0.65rem;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.content {
+  flex: 1;
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.entry {
+  background: #ffffff;
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+}
+
+.entryMeta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.55rem;
+}
+
+.entryLabel {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #FFAB00;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.entryDate {
+  font-size: 0.78rem;
+  color: #999;
+}
+
+.entryContent {
+  margin: 0;
+  font-size: 0.97rem;
+  color: #222;
+  line-height: 1.65;
+  white-space: pre-line;
+}
+
+.empty {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+  color: #999;
+}

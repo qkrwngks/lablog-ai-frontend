@@ -41,10 +41,10 @@ export function DraftsPage() {
           {MOCK_ITEMS.map((item) => (
             <li key={item.id} className={styles.cardWrap}>
               {item.hasClip && <Paperclip />}
-              <div className={styles.card}>
+              <Link to={`/report/${item.id}`} className={styles.card}>
                 <span className={styles.cardTitle}>{item.title}</span>
                 <span className={styles.cardStatus}>({item.status})</span>
-              </div>
+              </Link>
               <div className={styles.fold} />
             </li>
           ))}

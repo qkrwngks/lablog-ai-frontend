@@ -4,6 +4,7 @@ import { DraftsPage } from './pages/DraftsPage'
 import { HomePage } from './pages/HomePage'
 import { LoadingPage } from './pages/LoadingPage'
 import { RecordPage } from './pages/RecordPage'
+import { ReportDetailPage } from './pages/ReportDetailPage'
 import { UploadPage } from './pages/UploadPage'
 
 export default function App() {
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/archive" element={<ArchivePage />} />
         <Route path="/drafts" element={<DraftsPage />} />
         <Route path="/loading" element={<LoadingPage />} />
+        <Route path="/report/:id" element={<ReportDetailPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>

@@ -74,7 +74,7 @@ export function RecordPage() {
           {recording ? '촬영 중지 (데모)' : '촬영 시작 (데모)'}
         </button>
         <p className={styles.note}>
-          실제 녹화·저장은 백엔드 연동 후 연결됩니다. 지금은 권한·미리보기만 확인할 수 있습니다.
+          실제 녹화·저장은 백엔드 연동 후 연결됩니다. 지금은 권한·미리보기만 확인할 수 있습니다. 개인정보가 수집될 수 있습니다.
         </p>
         <button type="button" className={styles.secondary} onClick={stopCamera}>
           카메라 끄기
