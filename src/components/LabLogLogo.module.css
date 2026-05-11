@@ -7,10 +7,15 @@
 }
 
 .wordmark {
+  font-family: 'Poppins', 'Noto Sans KR', sans-serif;
   font-size: 2.85rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
+  font-weight: 400;
+  letter-spacing: -0.02em;
   color: var(--lab-text-logo);
+}
+
+.wordmarkBold {
+  font-weight: 700;
 }
 
 .iconWrap {
@@ -22,8 +27,7 @@
   width: 3.85rem;
   height: 3.85rem;
   display: block;
-  /* Paper UI 위에서 가장자리가 묻히도록 아주 약한 톤 섀도 */
-  filter: drop-shadow(0 1px 2px rgba(42, 49, 88, 0.14));
+  filter: hue-rotate(-12deg) saturate(0.76) drop-shadow(0 1px 2px rgba(42, 49, 88, 0.14));
 }
 
 /* 메인 화면 확대 레이아웃용 */
@@ -32,6 +36,6 @@
 }
 
 .hero .icon {
-  width: 4.6rem;
-  height: 4.6rem;
+  width: 3.6rem;
+  height: 3.6rem;
 }

@@ -8,7 +8,7 @@ type LabLogLogoProps = {
 export function LabLogLogo({ className }: LabLogLogoProps) {
   return (
     <div className={`${styles.brand} ${className ?? ''}`} aria-label="LabLog">
-      <span className={styles.wordmark}>LabLog</span>
+      <span className={styles.wordmark}>Lab<span className={styles.wordmarkBold}>Log</span></span>
       <div className={styles.iconWrap} aria-hidden>
         <img
           className={styles.icon}

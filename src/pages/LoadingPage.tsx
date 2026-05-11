@@ -1,10 +1,14 @@
 import { useEffect, useState } from 'react'
-import { Link, useLocation } from 'react-router-dom'
+import { useLocation } from 'react-router-dom'
 import { AppShell } from '../components/AppShell'
-import { LabLogLogo } from '../components/LabLogLogo'
+import { PageHeader } from '../components/PageHeader'
+import lablogMark from '../assets/lablog-mark.png'
 import styles from './LoadingPage.module.css'
 
 type LocationState = { phase?: 'upload' | 'analyze' }
+
+const R = 90
+const CIRC = 2 * Math.PI * R
 
 export function LoadingPage() {
   const location = useLocation()
@@ -18,38 +22,50 @@ export function LoadingPage() {
     return () => window.clearInterval(id)
   }, [])
 
-  const title =
-    phase === 'upload' ? '영상을 업로드하는 중입니다' : 'AI가 실험 영상을 분석 중입니다'
+  const offset = CIRC - (Math.min(progress, 100) / 100) * CIRC
 
-  const sub =
-    phase === 'upload'
-      ? '완료되면 키프레임 추출과 분석이 이어집니다.'
-      : '키프레임 추출 → 영상 분석 → 보고서 초안 생성'
+  const headerTitle = phase === 'upload' ? '영상 업로드' : '최종안 작성'
+  const centerTitle = phase === 'upload' ? '영상 업로드' : '보고서 최종안'
+  const centerSub = phase === 'upload' ? '업로드 중...' : '제작 중...'
 
   return (
     <AppShell variant="page">
-      <div className={styles.page}>
-        <div className={styles.top}>
-          <LabLogLogo className={styles.logoTight} />
-        </div>
+      <PageHeader title={headerTitle} />
+      <div className={styles.body}>
+        <div
+          className={styles.ringWrap}
+          role="progressbar"
+          aria-valuenow={Math.round(progress)}
+          aria-valuemin={0}
+          aria-valuemax={100}
+        >
+          <svg className={styles.ring} viewBox="0 0 220 220" aria-hidden>
+            {/* 배경 트랙 */}
+            <circle cx="110" cy="110" r={R} fill="none" stroke="#d5d7e3" strokeWidth="20" />
+            {/* 진행 호 */}
+            <circle
+              cx="110" cy="110" r={R}
+              fill="none"
+              stroke="var(--lab-lavender)"
+              strokeWidth="20"
+              strokeLinecap="round"
+              strokeDasharray={`${CIRC} ${CIRC}`}
+              strokeDashoffset={offset}
+              className={styles.ringArc}
+            />
+          </svg>
 
-        <div className={styles.body}>
-          <div className={styles.spinner} aria-hidden />
-          <h1 className={styles.title}>{title}</h1>
-          <p className={styles.sub}>{sub}</p>
-          <div
-            className={styles.barOuter}
-            role="progressbar"
-            aria-valuenow={Math.round(progress)}
-            aria-valuemin={0}
-            aria-valuemax={100}
-          >
-            <div className={styles.barInner} style={{ width: `${Math.min(100, progress)}%` }} />
+          <div className={styles.ringCenter}>
+            <img
+              className={styles.centerIcon}
+              src={lablogMark}
+              alt=""
+              width={840}
+              height={814}
+            />
+            <p className={styles.centerTitle}>{centerTitle}</p>
+            <p className={styles.centerSub}>{centerSub}</p>
           </div>
-          <p className={styles.eta}>예상 소요: 약 5~10분 (실서비스 기준)</p>
-          <Link to="/" className={styles.cancel}>
-            취소하고 메인으로
-          </Link>
         </div>
       </div>
     </AppShell>
