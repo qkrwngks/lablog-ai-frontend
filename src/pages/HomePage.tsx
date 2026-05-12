@@ -43,6 +43,7 @@ function CameraIcon() {
 export function HomePage() {
   return (
     <AppShell variant="home">
+      <div className={styles.paperBg} aria-hidden />
       <LabLogLogo className={logoStyles.hero} />
 
       <div className={styles.actions}>
