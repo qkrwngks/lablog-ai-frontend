@@ -22,7 +22,7 @@ export function LoadingPage() {
 
   useEffect(() => {
     const id = window.setInterval(() => {
-      setProgress((p) => Math.min(p + Math.random() * 12, 92))
+      setProgress((p) => p >= 92 ? p : Math.min(p + Math.random() * 12, 92))
     }, 400)
     return () => window.clearInterval(id)
   }, [])
