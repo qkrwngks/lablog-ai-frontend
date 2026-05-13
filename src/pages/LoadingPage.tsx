@@ -10,6 +10,11 @@ type LocationState = { phase?: 'upload' | 'analyze' }
 const R = 90
 const CIRC = 2 * Math.PI * R
 
+const PHASE_COPY = {
+  upload:  { headerTitle: '영상 업로드', centerTitle: '영상 업로드', centerSub: '업로드 중...' },
+  analyze: { headerTitle: '최종안 작성', centerTitle: '보고서 최종안', centerSub: '제작 중...' },
+} as const
+
 export function LoadingPage() {
   const location = useLocation()
   const phase = (location.state as LocationState | null)?.phase ?? 'analyze'
@@ -17,16 +22,14 @@ export function LoadingPage() {
 
   useEffect(() => {
     const id = window.setInterval(() => {
-      setProgress((p) => (p >= 92 ? 92 : p + Math.random() * 12))
+      setProgress((p) => Math.min(p + Math.random() * 12, 92))
     }, 400)
     return () => window.clearInterval(id)
   }, [])
 
   const offset = CIRC - (Math.min(progress, 100) / 100) * CIRC
 
-  const headerTitle = phase === 'upload' ? '영상 업로드' : '최종안 작성'
-  const centerTitle = phase === 'upload' ? '영상 업로드' : '보고서 최종안'
-  const centerSub = phase === 'upload' ? '업로드 중...' : '제작 중...'
+  const { headerTitle, centerTitle, centerSub } = PHASE_COPY[phase]
 
   return (
     <AppShell variant="page">
@@ -40,13 +43,11 @@ export function LoadingPage() {
           aria-valuemax={100}
         >
           <svg className={styles.ring} viewBox="0 0 220 220" aria-hidden>
-            {/* 배경 트랙 */}
-            <circle cx="110" cy="110" r={R} fill="none" stroke="#d5d7e3" strokeWidth="20" />
-            {/* 진행 호 */}
+            <circle cx="110" cy="110" r={R} fill="none" stroke="var(--lab-ring-track)" strokeWidth="20" />
             <circle
               cx="110" cy="110" r={R}
               fill="none"
-              stroke="var(--lab-lavender)"
+              stroke="var(--lab-ring)"
               strokeWidth="20"
               strokeLinecap="round"
               strokeDasharray={`${CIRC} ${CIRC}`}

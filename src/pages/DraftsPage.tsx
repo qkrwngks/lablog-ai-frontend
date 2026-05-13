@@ -41,7 +41,7 @@ export function DraftsPage() {
           {MOCK_ITEMS.map((item) => (
             <li key={item.id} className={styles.cardWrap}>
               {item.hasClip && <Paperclip />}
-              <Link to={`/report/${item.id}`} className={styles.card}>
+              <Link to={`/draft/${item.id}`} className={styles.card}>
                 <span className={styles.cardTitle}>{item.title}</span>
                 <span className={styles.cardStatus}>({item.status})</span>
               </Link>

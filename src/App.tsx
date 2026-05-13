@@ -1,5 +1,6 @@
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom'
 import { ArchivePage } from './pages/ArchivePage'
+import { DraftDetailPage } from './pages/DraftDetailPage'
 import { DraftsPage } from './pages/DraftsPage'
 import { HomePage } from './pages/HomePage'
 import { LoadingPage } from './pages/LoadingPage'
@@ -18,6 +19,7 @@ export default function App() {
         <Route path="/drafts" element={<DraftsPage />} />
         <Route path="/loading" element={<LoadingPage />} />
         <Route path="/report/:id" element={<ReportDetailPage />} />
+        <Route path="/draft/:id" element={<DraftDetailPage />} />
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
     </BrowserRouter>
