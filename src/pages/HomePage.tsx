@@ -3,6 +3,7 @@ import { AppShell } from '../components/AppShell'
 import { LabLogLogo } from '../components/LabLogLogo'
 import logoStyles from '../components/LabLogLogo.module.css'
 import styles from './HomePage.module.css'
+import { getUnseenClipCount } from '../data/drafts'
 
 function UploadIcon() {
   return (
@@ -41,6 +42,8 @@ function CameraIcon() {
 }
 
 export function HomePage() {
+  const unseenCount = getUnseenClipCount()
+
   return (
     <AppShell variant="home">
       <div className={styles.paperBg} aria-hidden />
@@ -62,9 +65,11 @@ export function HomePage() {
         </Link>
 
         <Link to="/drafts" className={`${styles.btn} ${styles.btnNavy} ${styles.btnShort}`}>
-          <span className={styles.badge} aria-label="새 항목 3건">
-            3
-          </span>
+          {unseenCount > 0 && (
+            <span className={styles.badge} aria-label={`새 항목 ${unseenCount}건`}>
+              {unseenCount}
+            </span>
+          )}
           임시 보관함
         </Link>
       </div>

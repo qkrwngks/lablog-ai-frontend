@@ -1,25 +1,18 @@
 import { Link } from 'react-router-dom'
+import { DRAFT_ITEMS, isDraftSeen } from '../data/drafts'
 import styles from './DraftsPage.module.css'
 
-const MOCK_ITEMS = [
-  { id: '1', title: '보고서A', status: '초안 검수', hasClip: true },
-  { id: '2', title: '보고서B', status: '초안 제작 중...', hasClip: false },
-  { id: '3', title: '보고서C', status: '최종본 제작 중...', hasClip: false },
-  { id: '4', title: '보고서D', status: '최종본 검수', hasClip: true },
-  { id: '5', title: '보고서E', status: '최종본 검수', hasClip: true },
-]
-
-function Paperclip() {
+function Paperclip({ seen }: { seen: boolean }) {
   return (
     <svg
-      className={styles.clip}
+      className={`${styles.clip} ${seen ? styles.clipSeen : styles.clipUnseen}`}
       viewBox="0 0 30 72"
       fill="none"
-      xmlns="http://www.w3.org/2000/svg"
+      aria-hidden="true"
     >
       <path
         d="M22 10 C22 5 8 5 8 10 L8 52 C8 62 22 62 22 52 L22 14 C22 9 12 9 12 14 L12 48"
-        stroke="#c0392b"
+        stroke="currentColor"
         strokeWidth="3.5"
         strokeLinecap="round"
         strokeLinejoin="round"
@@ -38,9 +31,9 @@ export function DraftsPage() {
 
       <main className={styles.content}>
         <ul className={styles.list}>
-          {MOCK_ITEMS.map((item) => (
+          {DRAFT_ITEMS.map((item) => (
             <li key={item.id} className={styles.cardWrap}>
-              {item.hasClip && <Paperclip />}
+              {item.hasClip && <Paperclip seen={isDraftSeen(item.id)} />}
               <Link to={`/draft/${item.id}`} className={styles.card}>
                 <span className={styles.cardTitle}>{item.title}</span>
                 <span className={styles.cardStatus}>({item.status})</span>
@@ -51,10 +44,10 @@ export function DraftsPage() {
         </ul>
 
         <div className={styles.chevronRow}>
-          <svg viewBox="0 0 24 24" fill="none" className={styles.chevron}>
+          <svg viewBox="0 0 24 24" fill="none" className={styles.chevron} aria-hidden="true">
             <path
               d="M6 9L12 15L18 9"
-              stroke="#888"
+              stroke="currentColor"
               strokeWidth="2.5"
               strokeLinecap="round"
               strokeLinejoin="round"

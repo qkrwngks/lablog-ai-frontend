@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import { AppShell } from '../components/AppShell'
 import { PageHeader } from '../components/PageHeader'
@@ -19,15 +19,22 @@ export function LoadingPage() {
   const location = useLocation()
   const phase = (location.state as LocationState | null)?.phase ?? 'analyze'
   const [progress, setProgress] = useState(0)
+  const intervalRef = useRef<number | undefined>(undefined)
 
   useEffect(() => {
-    const id = window.setInterval(() => {
-      setProgress((p) => p >= 92 ? p : Math.min(p + Math.random() * 12, 92))
+    intervalRef.current = window.setInterval(() => {
+      setProgress((p) => {
+        if (p >= 92) {
+          window.clearInterval(intervalRef.current)
+          return p
+        }
+        return Math.min(p + Math.random() * 12, 92)
+      })
     }, 400)
-    return () => window.clearInterval(id)
+    return () => window.clearInterval(intervalRef.current)
   }, [])
 
-  const offset = CIRC - (Math.min(progress, 100) / 100) * CIRC
+  const offset = CIRC - (progress / 100) * CIRC
 
   const { headerTitle, centerTitle, centerSub } = PHASE_COPY[phase]
 

@@ -1,6 +1,8 @@
-import { useParams } from 'react-router-dom'
+import { useEffect } from 'react'
+import { Navigate, useParams } from 'react-router-dom'
 import type { FinalReport } from '../types/report'
 import { ReportDetailView } from '../components/ReportDetailView'
+import { markDraftSeen } from '../data/drafts'
 
 const MOCK_DRAFTS: Record<string, FinalReport> = {
   '1': {
@@ -131,6 +133,12 @@ const MOCK_DRAFTS: Record<string, FinalReport> = {
 }
 
 export function DraftDetailPage() {
-  const { id = '' } = useParams()
+  const { id } = useParams<{ id: string }>()
+
+  useEffect(() => {
+    if (id) markDraftSeen(id)
+  }, [id])
+
+  if (!id || !MOCK_DRAFTS[id]) return <Navigate to="/drafts" replace />
   return <ReportDetailView report={MOCK_DRAFTS[id]} backTo="/drafts" />
 }
