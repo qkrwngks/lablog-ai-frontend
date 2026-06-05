@@ -113,12 +113,6 @@
   cursor: pointer;
 }
 
-/*
-  Fold shadow: sits in the 32×32 bottom-right corner.
-  linear-gradient(135deg) splits along the "/" diagonal:
-    upper-left triangle → transparent (card content shows through)
-    lower-right triangle → dark shadow (exposed folded corner)
-*/
 .fold {
   position: absolute;
   right: 0;

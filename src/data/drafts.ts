@@ -16,14 +16,17 @@ export const DRAFT_ITEMS: DraftItem[] = [
 ]
 
 const SEEN_KEY = 'lablog_seen_drafts'
+let _seenCache: Set<string> | null = null
 
 function getSeenIds(): Set<string> {
+  if (_seenCache) return _seenCache
   try {
     const raw = localStorage.getItem(SEEN_KEY)
-    return raw ? new Set<string>(JSON.parse(raw)) : new Set()
+    _seenCache = new Set<string>(raw ? JSON.parse(raw) : [])
   } catch {
-    return new Set()
+    _seenCache = new Set()
   }
+  return _seenCache
 }
 
 export function isDraftSeen(id: string): boolean {

@@ -131,7 +131,21 @@
   background: var(--lab-navy);
 }
 
+.btnNavy:active {
+  background: var(--lab-lavender);
+  box-shadow: 0 6px 20px rgba(142, 148, 193, 0.38);
+}
+
 .btnLavender {
+  background: var(--lab-lavender);
+  box-shadow: 0 6px 20px rgba(142, 148, 193, 0.38);
+}
+
+.btnRecord {
+  background: var(--lab-navy);
+}
+
+.btnRecord:active {
   background: var(--lab-lavender);
   box-shadow: 0 6px 20px rgba(142, 148, 193, 0.38);
 }

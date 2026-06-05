@@ -27,7 +27,7 @@ function UploadIcon() {
 function CameraIcon() {
   return (
     <svg
-      className={`${styles.heroIcon} ${styles.heroIconCamera}`}
+      className={styles.heroIcon}
       viewBox="0 0 64 64"
       aria-hidden
     >
@@ -55,7 +55,7 @@ export function HomePage() {
           <span>동영상 업로드</span>
         </Link>
 
-        <Link to="/record" className={`${styles.btn} ${styles.btnLavender} ${styles.btnTall}`}>
+        <Link to="/record" className={`${styles.btn} ${styles.btnRecord} ${styles.btnTall}`}>
           <CameraIcon />
           <span>동영상 촬영</span>
         </Link>
